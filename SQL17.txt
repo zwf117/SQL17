@@ -1,0 +1,63 @@
+信息系统与数据库技术练习17答题卡
+
+班级：     19信息管理1班
+姓名：     祝晚芳
+学号：     20190307117
+
+注：请将答案放置在序号下方。*/
+
+（一）
+1.
+USE PROJECT
+2.
+SELECT Did AS 部门号,AVG(BasePay) AS 平均基本工资,COUNT(Eid) AS 人数,COUNT(Insurance) AS 交保险人数
+FROM Employee
+GROUP BY Did
+3.
+SELECT Esex,AVG(DATEDIFF(YY,WorkDate,GETDATE())) AS AvgSeniority,COUNT(*) AS Cnt
+FROM Employee
+GROUP BY Esex
+4.
+SELECT Eid,Esex,COUNT(Eid) AS Cnt
+FROM Employee
+GROUP BY Eid,Esex
+ORDER BY Esex
+5.
+SELECT Pid,AVG(Wages)
+FROM EP
+GROUP BY Pid
+HAVING AVG(Wages)>=13000
+ORDER BY AVG(Wages) ASC
+6.
+SELECT Pid,AVG(Wages)
+FROM EP
+WHERE Pid IN ('A002','A004')
+GROUP BY Pid
+7.
+SELECT Did,COUNT(*)
+FROM Employee
+WHERE BasePay>5000
+GROUP BY Did
+8.
+SELECT Pid,COUNT(Eid)
+FROM EP
+GROUP BY Pid
+HAVING COUNT(Eid)>=2
+
+9.
+CREATE TABLE Involved
+(Id int PRIMARY KEY IDENTITY(1,1),
+Pid char(4) NOT NULL FOREIGN KEY REFERENCES Project,
+Eid char(4) NOT NULL FOREIGN KEY REFERENCES Employee,
+Idate smalldatetime,
+Inum decimal(12,3))
+
+10.
+INSERT Involved(Pid,Eid)
+VALUES('A001',1002),
+('A001',1004),
+('A002',1004)
+
+11.
+SELECT *
+FROM Involved
